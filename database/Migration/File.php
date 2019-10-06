@@ -22,7 +22,7 @@ class File extends BaseMigration
      */
     public function up(): void
     {
-        $this->schema->createIfNotExists('IMTransmitFile', function (Blueprint $blueprint){
+        $this->schema->createIfNotExists('File', function (Blueprint $blueprint){
             $blueprint->mediumIncrements('id');
             $blueprint->string('name')->comment('文件名称');
             $blueprint->string('clientFilename')->comment('文件原名称');
@@ -38,6 +38,8 @@ class File extends BaseMigration
             $blueprint->string('url')->default(null)->comment('url|第三方路径');
             $blueprint->tinyInteger('status', false, true, 3)->default(1)->comment('是否有效');
             $blueprint->timestamps();
+            $blueprint->index(['linkId', 'module']);
+            $blueprint->index(['name', 'module']);
         });
 
     }

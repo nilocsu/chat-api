@@ -22,7 +22,7 @@ class IMGroupMember extends BaseMigration
      */
     public function up(): void
     {
-        $this->schema->createIfNotExists('admin', function (Blueprint $blueprint){
+        $this->schema->createIfNotExists('IMGroupMember', function (Blueprint $blueprint){
             $blueprint->mediumIncrements('id');
             $blueprint->integer('groupId')->unsigned()->comment('群Id');
             $blueprint->integer('userId')->unsigned()->comment('用户Id');
@@ -42,6 +42,6 @@ class IMGroupMember extends BaseMigration
      */
     public function down(): void
     {
-        $this->schema->dropIfExists('admin');
+        $this->schema->dropIfExists('IMGroupMember');
     }
 }

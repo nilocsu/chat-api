@@ -36,7 +36,6 @@ class User extends BaseMigration
             $blueprint->string('chatColor')->default(null)->comment('聊天文字颜色');
             $blueprint->tinyInteger('status', false, true, 1)->default(1)->comment('1 已使用 0 未使用');
             $blueprint->timestamp('lastLoginTime')->default(null)->comment('注册时间');
-            $blueprint->timestamp('lastLoginTime')->default(null)->comment('注册时间');
         });
 
     }

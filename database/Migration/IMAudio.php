@@ -25,16 +25,11 @@ class IMAudio extends BaseMigration
     {
         $this->schema->createIfNotExists('IMAudio', function (Blueprint $blueprint){
             $blueprint->mediumIncrements('id');
-            $blueprint->string('name')->default('')->comment('群名称');
-            $blueprint->string('avatar')->default('')->comment('群头像');
-            $blueprint->string('describe')->default('')->comment('群说明');
-            $blueprint->integer('creator')->unsigned()->default(0)->comment('创建者Id');
-            $blueprint->tinyInteger('type', false, true, 3)->comment('群组类型，1-固定;2-临时群');
-            $blueprint->integer('userCnt', false, true)->default(0)->comment('群员人数');
-            $blueprint->tinyInteger('status', false, true, 3)->default(1)->comment('是否删除,0-正常，1-删除');
+            $blueprint->integer('fromId')->unsigned()->comment('发送者Id');
+            $blueprint->integer('toId')->unsigned()->comment('接受者Id');
+            $blueprint->integer('size')->default(0)->comment('文件大小');
+            $blueprint->integer('duration')->default(0)->comment('语音时长');
             $blueprint->timestamps();
-            $blueprint->index('name');
-            $blueprint->index('creator');
         });
 
     }

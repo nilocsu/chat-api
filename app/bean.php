@@ -58,6 +58,8 @@ return [
             'task_enable_coroutine' => true,
             'worker_num'            => 2,
             'package_max_length'    => 167772160,    // 20M
+            'enable_static_handler' => true,
+            'document_root'         => dirname(__DIR__) . '/public',
         ],
     ],
     'httpDispatcher'     => [
@@ -67,6 +69,9 @@ return [
             // \Swoft\Whoops\WhoopsMiddleware::class,
             // Allow use @View tag
             \Swoft\View\Middleware\ViewMiddleware::class,
+            // 增加ajax跨域中间件
+            \App\Http\Middleware\CorsMiddleware::class,
+            \App\Http\Middleware\ServiceMiddleware::class,
         ],
         'afterMiddlewares' => [
             \Swoft\Http\Server\Middleware\ValidatorMiddleware::class,

@@ -26,14 +26,14 @@ class IMMessage extends BaseMigration
         for($i = 0; $i < $this->tableNum; $i++){
             $this->schema->createIfNotExists('IMMessage_'.$i, function (Blueprint $blueprint){
                 $blueprint->mediumIncrements('id');
-                $blueprint->integer('userId')->unsigned()->comment('用户Id');
+                $blueprint->integer('senderUserId')->unsigned()->comment('用户Id');
                 $blueprint->integer('targetId')->unsigned()->comment('对方Id');
                 $blueprint->string('conversationType')->comment('会话类型');
                 $blueprint->text('content')->nullable()->comment('消息内容');
                 $blueprint->string('objectName')->nullable()->comment('消息类型');
                 $blueprint->bigInteger('sentTime')->nullable()->comment('发送时间');
                 $blueprint->index(['senderUserId', 'targetId', 'conversationType']);
-                $blueprint->index(['senderUserId', 'targetId', 'conversationType','objectName']);
+                $blueprint->index('sentTime');
             });
 
         }

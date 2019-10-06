@@ -33,8 +33,9 @@ class IMConversation extends BaseMigration
             $blueprint->tinyInteger('notification', false, true, 3)->default(1)->comment('0-提醒，0-不用提醒');
             $blueprint->bigInteger('createdAt')->unsigned()->comment('创建时间');
             $blueprint->bigInteger('updatedAt')->nullable(true)->comment('更新时间');
-            $blueprint->index(['senderUserId', 'targetId', 'conversationType', 'status']);
+            $blueprint->index(['senderUserId', 'targetId', 'conversationType']);
             $blueprint->index(['senderUserId', 'updatedAt']);
+            $blueprint->index('status');
         });
 
     }

@@ -23,14 +23,16 @@ class IMGroup extends BaseMigration
      */
     public function up(): void
     {
-        $this->schema->createIfNotExists('admin', function (Blueprint $blueprint){
+        $this->schema->createIfNotExists('IMGroup', function (Blueprint $blueprint){
             $blueprint->increments('id');
-            $blueprint->integer('fromId')->unsigned()->comment('发送者Id');
-            $blueprint->integer('toId')->unsigned()->comment('接受者Id');
-            $blueprint->integer('size')->default(0)->comment('文件大小');
-            $blueprint->integer('duration')->default(0)->comment('语音时长');
-            $blueprint->timestamps();
-            $blueprint->index(['fromId', 'toId']);
+            $blueprint->string('name')->default('')->comment('群名称');
+            $blueprint->string('avatar')->default('')->default('群头像');
+            $blueprint->integer('creator')->unsigned()->default(0)->comment('创建者Id');
+            $blueprint->tinyInteger('type', false, true, 3)->comment('群组类型，1-固定;2-临时群');
+            $blueprint->integer('userCnt', false, true)->default(0)->comment('群员人数');
+            $blueprint->timestamp('createdAt')->nullable(true);
+            $blueprint->timestamp('updatedAt')->nullable(true);
+            $blueprint->index('creator');
         });
 
     }
@@ -40,6 +42,6 @@ class IMGroup extends BaseMigration
      */
     public function down(): void
     {
-        $this->schema->dropIfExists('admin');
+        $this->schema->dropIfExists('IMGroup');
     }
 }
